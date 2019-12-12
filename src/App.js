@@ -10,9 +10,12 @@ function App() {
   const [date, setDate] = useState(``);
   const [title, setTitle] = useState(``);
   const [count, setCount] = useState(2018);
+  const [countday, setCountday] = useState(12);
+  const [countmonth, setCountmonth] = useState(11);
+
   const [year, setYear] = useState(count);
-  const [month, setMonth] = useState(12);
-  const [day, setDay] = useState(11);
+  const [month, setMonth] = useState(countmonth);
+  const [day, setDay] = useState(countday);
   const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
 
   const yes = e => {
@@ -32,7 +35,7 @@ function App() {
         const apoddate = response.data.date;
         let apodtitle = response.data.title;
 
-        console.log(response.data);
+        // console.log(response.data);
         setApod(apodImg);
         setInfo(apodinfo);
         setDate(apoddate);
@@ -41,10 +44,12 @@ function App() {
       .catch(err => {
         console.log(err.message, `sorry`);
       });
-  }, [count, year]);
+  }, [count, year, month, day]);
 
   const handleyrchange = e => {
     setCount(e.target.value);
+    setCountmonth(e.target.value);
+    setCountday(e.target.value);
     // setYear(count - 1);
   };
 
@@ -52,8 +57,16 @@ function App() {
     event.prventDefault();
     setCount(count);
   };
+  const onSubmitdy = event => {
+    event.prventDefault();
+    setCountday(countmonth);
+  };
+  const onSubmitmth = event => {
+    event.prventDefault();
+    setCountmonth(countmonth);
+  };
 
-  console.log(`hello`, count, year);
+  console.log(`hello`, count, year, month);
 
   return (
     <div className='App'>
@@ -66,17 +79,16 @@ function App() {
         <form onSubmit={onSubmityr}>
           <input type='text' name='year' onChange={handleyrchange} />
         </form>
-        <form>
-          <input type='text' name='month' onChange={``} />
-          <button type='submit'>change month</button>
+        <button onClick={e => setYear(count)}>change year</button>
+        <form onSubmit={onSubmitmth}>
+          <input type='text' name='month' onChange={handleyrchange} />
         </form>
-        <form>
-          <input type='text' name='day' onChange={``} />
-          <button type='submit'>change day</button>
+        <button onClick={e => setMonth(countmonth)}>change month</button>
+        <form onSubmit={onSubmitdy}>
+          <input type='text' name='day' onChange={handleyrchange} />
         </form>
+        <button onClick={e => setDay(countday)}> change day</button>
       </div>
-
-      <button onClick={e => setYear(count)}>change year</button>
 
       <Apod apod={apod}></Apod>
       <Apodinfo info={info} date={date} title={title} />
