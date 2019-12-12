@@ -9,6 +9,7 @@ function App() {
   const [info, setInfo] = useState(``);
   const [date, setDate] = useState(``);
   const [title, setTitle] = useState(``);
+
   const [count, setCount] = useState(2019);
   const [countday, setCountday] = useState(12);
   const [countmonth, setCountmonth] = useState(12);
@@ -16,11 +17,12 @@ function App() {
   const [year, setYear] = useState(count);
   const [month, setMonth] = useState(countmonth);
   const [day, setDay] = useState(countday);
+  const [photoOftheDay, setPhotoOftheDay] = useState(``);
   const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
 
-  const yes = e => {
-    setYear(count + 1);
-  };
+  // const yes = e => {
+  //   setYear(count + 1);
+  // };
 
   useEffect(() => {
     axios
@@ -29,6 +31,9 @@ function App() {
       )
       .then(response => {
         const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
+
+        const photoOftheDay = response.data;
+        console.log(photoOftheDay);
 
         const apodImg = response.data.hdurl;
         const apodinfo = response.data.explanation;
@@ -42,9 +47,15 @@ function App() {
         setTitle(apodtitle);
       })
       .catch(err => {
-        console.log(err.message, `sorry`);
+        console.log(`Error:` + err);
+        setPhotoOftheDay({
+          copyright: ``,
+          title: ``,
+          explanation: `Sorry`,
+          hdurl: `https://images.unsplash.com/photo-1555861496-0666c8981751?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80`
+        });
       });
-  }, [count, year, month, day]);
+  }, [year, month, day]);
 
   const handleyrchange = e => {
     setCount(e.target.value);
@@ -59,14 +70,14 @@ function App() {
   };
   const onSubmitdy = event => {
     event.prventDefault();
-    setCountday(countmonth);
+    setCountday(countday);
   };
   const onSubmitmth = event => {
     event.prventDefault();
     setCountmonth(countmonth);
   };
 
-  console.log(`hello`, count, year, month);
+  console.log(`Date`, count, year, month);
 
   return (
     <div className='App'>
