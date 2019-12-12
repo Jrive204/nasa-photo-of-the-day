@@ -2,9 +2,12 @@ import React from "react";
 import "../App.css";
 
 function Apod(props) {
+  {
+    if (!props.apod) return <h3>Loading...</h3>;
+  }
+
   return (
     <div>
-      {/* <h1>Astrononmy Picture of the Day </h1> */}
       <img src={props.apod}></img>
     </div>
   );

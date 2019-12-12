@@ -6,7 +6,7 @@ function Apodinfo(props) {
     <div>
       <h1>Astrononmy Picture of the Day </h1>
       <h2>{props.title}</h2>
-      <p className='date'> {props.apoddate} </p>
+      <p className='date'> {props.date} </p>
       <p>{props.info}</p>
     </div>
   );
