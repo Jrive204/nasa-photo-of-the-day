@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import Apodinfo from "./Components/ApodInfo";
 import Apod from "./Components/Apod";
+import styled from "styled-components";
 
 function App() {
   const [apod, setApod] = useState([]);
@@ -15,10 +16,24 @@ function App() {
   const [countmonth, setCountmonth] = useState(12);
 
   const [year, setYear] = useState(count);
-  const [month, setMonth] = useState(countmonth);
   const [day, setDay] = useState(countday);
+  const [month, setMonth] = useState(countmonth);
+
   const [photoOftheDay, setPhotoOftheDay] = useState(``);
   const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
+
+  const Button = styled.button`
+    /* Adapt the colors based on primary prop */
+    background: ${props => (props.primary ? "blue" : "white")};
+    color: ${props => (props.primary ? "white" : "blue")};
+
+    display: block;
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid red;
+    border-radius: 3px;
+  `;
 
   // const yes = e => {
   //   setYear(count + 1);
@@ -57,6 +72,8 @@ function App() {
       });
   }, [year, month, day]);
 
+  console.log(apod);
+
   const handleyrchange = e => {
     setCount(e.target.value);
     setCountmonth(e.target.value);
@@ -65,7 +82,7 @@ function App() {
   };
 
   const onSubmityr = event => {
-    event.prventDefault();
+    event.preventDefault();
     setCount(count);
   };
   const onSubmitdy = event => {
@@ -77,10 +94,16 @@ function App() {
     setCountmonth(countmonth);
   };
 
-  console.log(`Date`, count, year, month);
+  var divStyle = {
+    backgroundImage: "url(" + apod + ")",
+    width: "100%",
+    height: "100vh"
+  };
+
+  console.log(`Date`, count, day, month);
 
   return (
-    <div className='App'>
+    <div className='App' style={divStyle}>
       <div
         style={{
           display: `flex`,
@@ -88,17 +111,29 @@ function App() {
           padding: `1%`
         }}>
         <form onSubmit={onSubmityr}>
-          <input type='text' name='year' onChange={handleyrchange} />
+          {/* <label>Year</label> */}
+          <input
+            placeholder={`Year`}
+            type='text'
+            name='year'
+            onChange={handleyrchange}
+          />
         </form>
-        <button onClick={e => setYear(count)}>change year</button>
+        <Button primary onClick={e => setYear(count)}>
+          change year
+        </Button>
         <form onSubmit={onSubmitmth}>
           <input type='text' name='month' onChange={handleyrchange} />
         </form>
-        <button onClick={e => setMonth(countmonth)}>change month</button>
+        <Button primary onClick={e => setMonth(countmonth)}>
+          change month
+        </Button>
         <form onSubmit={onSubmitdy}>
           <input type='text' name='day' onChange={handleyrchange} />
         </form>
-        <button onClick={e => setDay(countday)}> change day</button>
+        <Button primary onClick={e => setDay(countday)}>
+          change day
+        </Button>
       </div>
 
       <Apod apod={apod}></Apod>
