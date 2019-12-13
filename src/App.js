@@ -122,11 +122,13 @@ function App() {
 
   return (
     <div className='App' style={divStyle}>
-      <a onClick={Toggleview}>
-        <img
-          style={{ width: `40px`, height: `40px` }}
-          src='http://s3.amazonaws.com/production.mediajoint.prx.org/public/piece_images/572482/Arts_Calendar_Logo-Icon_for_PRX_small.png'></img>
-      </a>
+      <div style={{ paddingTop: `.5%` }}>
+        <a onClick={Toggleview}>
+          <img
+            style={{ width: `40px`, height: `40px` }}
+            src='http://s3.amazonaws.com/production.mediajoint.prx.org/public/piece_images/572482/Arts_Calendar_Logo-Icon_for_PRX_small.png'></img>
+        </a>
+      </div>
       <div className='formbuttondiv'>
         <Section
           style={currentThemedate}
@@ -151,8 +153,14 @@ function App() {
         </Section>
       </div>
       <div>
-        <div className='buttoncont'>
-          <button onClick={toggledisplay}>{`\u29E8`}</button>
+        <div
+          style={{ marginLeft: `2%`, marginTop: `2%` }}
+          className='buttoncont'>
+          <a onClick={toggledisplay}>
+            <img
+              style={{ width: `40px`, height: `40px` }}
+              src='https://image.flaticon.com/icons/png/512/1661/1661909.png'></img>
+          </a>
         </div>
         <Section style={currentTheme} className='TextCont' background='#342d39'>
           <Apod apod={apod}></Apod>
