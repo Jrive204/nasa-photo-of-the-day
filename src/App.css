@@ -18,6 +18,29 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.TextCont {
+  display: flex;
+  width: 35%;
+}
+
+@media (max-width: 600px) {
+  .TextCont {
+    width: 100%;
+  }
+}
+
+.buttoncont {
+  display: flex;
+  margin-left: 1%;
+  padding-bottom: 10px;
+}
+
+p,
+h1,
+h2 {
+  font-size: 1rem;
+  color: white;
+}
 
 .App-link {
   color: #61dafb;
@@ -30,4 +53,37 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+.formbuttondiv {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding-right: 2.5%;
+  padding-top: 0.5%;
+}
+
+.DN {
+  display: none;
+}
+
+.Forminput {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  padding-top: 5%;
+  padding-right: 2%;
+}
+
+.formbg {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
 }
