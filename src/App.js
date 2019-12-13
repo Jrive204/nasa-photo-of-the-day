@@ -16,7 +16,7 @@ function App() {
   const [title, setTitle] = useState(``);
 
   const [count, setCount] = useState(2019);
-  const [countday, setCountday] = useState(12);
+  const [countday, setCountday] = useState(13);
   const [countmonth, setCountmonth] = useState(12);
 
   const [year, setYear] = useState(count);
@@ -69,14 +69,14 @@ function App() {
   // Date current theme
   let currentThemedate = {};
   displaydate
-    ? (currentThemedate = displaycontent.show)
-    : (currentThemedate = displaycontent.hide);
+    ? (currentThemedate = displaycontent.hide)
+    : (currentThemedate = displaycontent.show);
 
   // current theme for text content
   let currentTheme = {};
   displayshow
-    ? (currentTheme = displaycontent.show)
-    : (currentTheme = displaycontent.hide);
+    ? (currentTheme = displaycontent.hide)
+    : (currentTheme = displaycontent.show);
 
   const toggledisplay = () => {
     displayHidden(!displayshow);
