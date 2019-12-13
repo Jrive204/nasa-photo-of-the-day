@@ -4,6 +4,8 @@ import "./App.css";
 import Apodinfo from "./Components/ApodInfo";
 import Apod from "./Components/Apod";
 import styled from "styled-components";
+import Forms from "./Components/Forms";
+import { Button, divStyle, apod } from "./Components/style";
 
 function App() {
   const [apod, setApod] = useState([]);
@@ -22,30 +24,13 @@ function App() {
   const [photoOftheDay, setPhotoOftheDay] = useState(``);
   const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
 
-  const Button = styled.button`
-    /* Adapt the colors based on primary prop */
-    background: ${props => (props.primary ? "blue" : "white")};
-    color: ${props => (props.primary ? "white" : "blue")};
-
-    display: block;
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid red;
-    border-radius: 3px;
-  `;
-
-  // const yes = e => {
-  //   setYear(count + 1);
-  // };
-
   useEffect(() => {
     axios
       .get(
         `https://api.nasa.gov/planetary/apod?api_key=${nasakey}&date=${year}-${month}-${day}`
       )
       .then(response => {
-        const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
+        // const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
 
         const photoOftheDay = response.data;
         console.log(photoOftheDay);
@@ -76,9 +61,18 @@ function App() {
 
   const handleyrchange = e => {
     setCount(e.target.value);
-    setCountmonth(e.target.value);
+    // setCountmonth(e.target.value);
+    // setCountday(e.target.value);
+  };
+  const handledaychange = e => {
+    // setCount(e.target.value);
+    // setCountmonth(e.target.value);
     setCountday(e.target.value);
-    // setYear(count - 1);
+  };
+  const handlemonthchange = e => {
+    // setCount(e.target.value);
+    setCountmonth(e.target.value);
+    // setCountday(e.target.value);
   };
 
   const onSubmityr = event => {
@@ -95,51 +89,41 @@ function App() {
   };
 
   var divStyle = {
-    backgroundImage: "url(" + apod + ")",
+    backgroundImage: `url(${apod})`,
     width: "100%",
-    height: "100vh"
+    height: "100vh",
+    backgroundPosition: `center`,
+    backgroundRepeat: `no-repeat`,
+    backgroundSize: `cover`
   };
 
-  console.log(`Date`, count, day, month);
+  console.log(`Date`, count, countday, countmonth);
 
   return (
     <div className='App' style={divStyle}>
-      <div
-        style={{
-          display: `flex`,
-          justifyContent: `space-evenly`,
-          padding: `1%`
-        }}>
-        <form onSubmit={onSubmityr}>
-          {/* <label>Year</label> */}
-          <input
-            placeholder={`Year`}
-            type='text'
-            name='year'
-            onChange={handleyrchange}
-          />
-        </form>
-        <Button primary onClick={e => setYear(count)}>
-          change year
-        </Button>
-        <form onSubmit={onSubmitmth}>
-          <input type='text' name='month' onChange={handleyrchange} />
-        </form>
-        <Button primary onClick={e => setMonth(countmonth)}>
-          change month
-        </Button>
-        <form onSubmit={onSubmitdy}>
-          <input type='text' name='day' onChange={handleyrchange} />
-        </form>
-        <Button primary onClick={e => setDay(countday)}>
-          change day
+      <Forms
+        handledaychange={handledaychange}
+        onSubmitdy={onSubmitdy}
+        handlemonthchange={handlemonthchange}
+        onSubmitmth={onSubmitmth}
+        handleyrchange={handleyrchange}
+        onSubmityr={onSubmityr}></Forms>
+
+      <div className='formbuttondiv'>
+        <Button
+          primary
+          onClick={e => {
+            setYear(count);
+            setMonth(countmonth);
+            setDay(countday);
+          }}>
+          change Date
         </Button>
       </div>
-
-      <Apod apod={apod}></Apod>
-      <Apodinfo info={info} date={date} title={title} />
-
-      <p></p>
+      <div>
+        <Apod apod={apod}></Apod>
+        <Apodinfo info={info} date={date} title={title} />
+      </div>
     </div>
   );
 }
