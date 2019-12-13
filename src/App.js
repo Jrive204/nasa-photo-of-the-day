@@ -151,7 +151,6 @@ function App() {
         </Section>
       </div>
       <div>
-        ]
         <div className='buttoncont'>
           <button onClick={toggledisplay}>{`\u29E8`}</button>
         </div>
