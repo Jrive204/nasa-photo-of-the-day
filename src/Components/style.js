@@ -13,3 +13,12 @@ padding: 0.25em 1em;
 border: 2px solid whitesmoke;
 border-radius: 3px;
 `;
+const padding = "2%";
+
+export const Section = styled.section`
+  color: white;
+  /* Pass variables as inputs */
+  padding: ${padding};
+  /* Adjust the background from the properties */
+  background: ${props => props.background};
+`;

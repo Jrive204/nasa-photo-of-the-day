@@ -53,3 +53,9 @@ Do not attempt stretch problems until MVP has been reached and a final commit ha
 - [ ] Implement snapshot testing in your react application.
  
 ## Part I - [Component Side Effects](README.md)
+
+        render(
+        <Section className='TextCont' background='#342d39'>
+         
+        </Section>
+        )

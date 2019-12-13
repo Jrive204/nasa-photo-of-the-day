@@ -18,6 +18,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.TextCont {
+  display: flex;
+  width: 35%;
+}
+.buttoncont {
+  display: flex;
+  margin-left: 1%;
+  padding-bottom: 10px;
+}
 
 p,
 h1,
@@ -43,35 +52,29 @@ form {
   align-items: center;
 }
 
-.backgroundimg {
-  background-image: ; /* The image used */
-  background-color: #cccccc; /* Used if the image is unavailable */
-  height: 100vh; /* You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-}
-
-/* .App {
-  background-image: url("https://api.nasa.gov/planetary/apod?api_key=DJqcc2QfRAfP8FktB7mpqLcdtPig9ij7BUd2CRr6");
-}
-xport const Image = styled.img`
+.formbuttondiv {
+  display: flex;
   width: 100%;
-  /* height: 80%; */
-/* padding: 0%;
-  margin: 0%;
-`;
+  justify-content: flex-end;
+  padding-right: 2.5%;
+  padding-top: 0.5%;
+}
 
-export const Container = styled.div`
-  position: relative;
-  text-align: center;
-  color: white;
-`;
+.DN {
+  display: none;
+}
 
-export const Centerd = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.2rem;
-`; */
+.Forminput {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  padding-top: 5%;
+  padding-right: 2%;
+}
+
+.formbg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

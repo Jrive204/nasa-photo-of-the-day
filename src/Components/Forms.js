@@ -10,25 +10,14 @@ export default function Forms({
   handlemonthchange,
   onSubmitdy
 }) {
-  //   [
-  //     onSubmityr,
-  //     handleyrchange,
-  //     onSubmitmth,
-  //     handledaychange,
-  //     handlemonthchange,
-  //     onSubmitdy
-  //   ] = props;
+  //
 
   return (
-    <div
-      style={{
-        display: `flex`,
-        justifyContent: `space-evenly`,
-        padding: `1%`
-      }}>
+    <div className='Forminput'>
       <form onSubmit={onSubmityr}>
         <input
-          placeholder={`Type Year`}
+          style={{ textAlign: "center" }}
+          placeholder={` Year`}
           type='text'
           name='year'
           onChange={handleyrchange}
@@ -36,7 +25,8 @@ export default function Forms({
       </form>
       <form onSubmit={onSubmitmth}>
         <input
-          placeholder={`Type Month`}
+          style={{ textAlign: "center" }}
+          placeholder={` Month`}
           type='text'
           name='month'
           onChange={handlemonthchange}
@@ -44,7 +34,8 @@ export default function Forms({
       </form>
       <form onSubmit={onSubmitdy}>
         <input
-          placeholder={`Type Day`}
+          style={{ textAlign: "center" }}
+          placeholder={` Day`}
           type='text'
           name='day'
           onChange={handledaychange}

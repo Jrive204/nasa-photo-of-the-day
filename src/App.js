@@ -5,9 +5,11 @@ import Apodinfo from "./Components/ApodInfo";
 import Apod from "./Components/Apod";
 import styled from "styled-components";
 import Forms from "./Components/Forms";
-import { Button, divStyle, apod } from "./Components/style";
+import { Button, divStyle, apod, Section, padding } from "./Components/style";
 
 function App() {
+  const [displayshow, displayHidden] = useState(false);
+  const [displaydate, changeDate] = useState(false);
   const [apod, setApod] = useState([]);
   const [info, setInfo] = useState(``);
   const [date, setDate] = useState(``);
@@ -30,8 +32,6 @@ function App() {
         `https://api.nasa.gov/planetary/apod?api_key=${nasakey}&date=${year}-${month}-${day}`
       )
       .then(response => {
-        // const nasakey = `CIb9BdoewJPtHNXbgGlBigAR7uVuDCup3e88hOBY`;
-
         const photoOftheDay = response.data;
         console.log(photoOftheDay);
 
@@ -40,7 +40,6 @@ function App() {
         const apoddate = response.data.date;
         let apodtitle = response.data.title;
 
-        // console.log(response.data);
         setApod(apodImg);
         setInfo(apodinfo);
         setDate(apoddate);
@@ -59,20 +58,42 @@ function App() {
 
   console.log(apod);
 
+  const displaycontent = {
+    show: {
+      display: `none`
+    },
+    hide: {
+      display: `flex`
+    }
+  };
+  // Date current theme
+  let currentThemedate = {};
+  displaydate
+    ? (currentThemedate = displaycontent.show)
+    : (currentThemedate = displaycontent.hide);
+
+  // current theme for text content
+  let currentTheme = {};
+  displayshow
+    ? (currentTheme = displaycontent.show)
+    : (currentTheme = displaycontent.hide);
+
+  const toggledisplay = () => {
+    displayHidden(!displayshow);
+  };
+
+  const Toggleview = () => {
+    changeDate(!displaydate);
+  };
+
   const handleyrchange = e => {
     setCount(e.target.value);
-    // setCountmonth(e.target.value);
-    // setCountday(e.target.value);
   };
   const handledaychange = e => {
-    // setCount(e.target.value);
-    // setCountmonth(e.target.value);
     setCountday(e.target.value);
   };
   const handlemonthchange = e => {
-    // setCount(e.target.value);
     setCountmonth(e.target.value);
-    // setCountday(e.target.value);
   };
 
   const onSubmityr = event => {
@@ -101,28 +122,43 @@ function App() {
 
   return (
     <div className='App' style={divStyle}>
-      <Forms
-        handledaychange={handledaychange}
-        onSubmitdy={onSubmitdy}
-        handlemonthchange={handlemonthchange}
-        onSubmitmth={onSubmitmth}
-        handleyrchange={handleyrchange}
-        onSubmityr={onSubmityr}></Forms>
-
+      <a onClick={Toggleview}>
+        <img
+          style={{ width: `40px`, height: `40px` }}
+          src='http://s3.amazonaws.com/production.mediajoint.prx.org/public/piece_images/572482/Arts_Calendar_Logo-Icon_for_PRX_small.png'></img>
+      </a>
       <div className='formbuttondiv'>
-        <Button
-          primary
-          onClick={e => {
-            setYear(count);
-            setMonth(countmonth);
-            setDay(countday);
-          }}>
-          change Date
-        </Button>
+        <Section
+          style={currentThemedate}
+          className='formbg'
+          background='#0000ff00'>
+          <Forms
+            handledaychange={handledaychange}
+            onSubmitdy={onSubmitdy}
+            handlemonthchange={handlemonthchange}
+            onSubmitmth={onSubmitmth}
+            handleyrchange={handleyrchange}
+            onSubmityr={onSubmityr}></Forms>
+          <Button
+            primary
+            onClick={e => {
+              setYear(count);
+              setMonth(countmonth);
+              setDay(countday);
+            }}>
+            Change Date
+          </Button>
+        </Section>
       </div>
       <div>
-        <Apod apod={apod}></Apod>
-        <Apodinfo info={info} date={date} title={title} />
+        ]
+        <div className='buttoncont'>
+          <button onClick={toggledisplay}>{`\u29E8`}</button>
+        </div>
+        <Section style={currentTheme} className='TextCont' background='#342d39'>
+          <Apod apod={apod}></Apod>
+          <Apodinfo info={info} date={date} title={title} />
+        </Section>
       </div>
     </div>
   );
